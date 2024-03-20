@@ -1,0 +1,70 @@
+/*
+StAuth10244: I Alen Varghese Cheruvally Kunjumon, 000837873 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else.
+
+*/
+#outermostDiv{
+    border-left: 2px solid dimgray;
+    border-right: 2px solid dimgray;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+#headings{
+    color:dimgray ;
+    text-align: center;
+}
+
+#contentDisplay{
+    text-align: center;
+}
+
+#DiceDisplay{
+    display: flex;
+ 
+}
+
+
+
+#eachDice{
+    background-color: dimgray;
+    height: 100px;
+    width:100px;
+    margin: 25px;
+    border-radius: 3px;
+    font-size: 80px;
+    text-align: center;
+    color: white;
+    margin-left: 10px;
+}
+
+#rollButton{
+    text-align: center;
+}
+
+label{
+    color: gray ;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+button{
+    border-radius: 4px;
+    background-color:burlywood;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: dimgray;
+    box-shadow: 0 5px dimgray;
+    transform: translateY(4px);
+  }

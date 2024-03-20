@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class Dice extends React.Component{
+        render(){
+           return (
+            <div id="eachDice" onClick={this.props.changedDiceNumber}>
+               {this.props.number}
+            </div>
+           )
+        }
+    }
+
+
+
+
+    class DiceApp extends React.Component
+    {
+        constructor(props)
+            {
+                super(props)
+                this.state = {numberOfSides:this.props.initialCounterProp,numberOfDice:this.props.initialNumberOfSides,eachDice:[1]}
+            };
+
+            increaseNumberofDice(){
+                this.setState((event) => {
+                    const newDiceObject = event.eachDice.slice();
+                    newDiceObject[event.eachDice.length] = 1;
+                    return {
+                    numberOfDice: event.numberOfDice + 1,
+                    eachDice: newDiceObject
+                    };
+                });
+            }
+
+            diceReset(){
+                this.setState({
+                    numberOfDice: 1,
+                    eachDice: [1],
+                });
+            }
+
+            increaseNumberofSides(){
+                if(this.state.numberOfSides>=20){
+                    this.state.numberOfSides = 20;
+
+                }
+                else{
+                    let increasedCount = this.state.numberOfSides + 1;
+                    this.setState({numberOfSides:increasedCount})
+                }
+                
+            }
+
+            decreaseNumberofSides(){
+                if(this.state.numberOfSides<=1){
+                    this.state.numberOfSides = 1;
+                }
+                else{
+                    let decreasedCount = this.state.numberOfSides - 1;
+                    this.setState({numberOfSides:decreasedCount})
+                }
+                
+            }
+
+   
+
+
+            changedDiceNumber(counter){
+                this.setState((event) => {
+                    let index = counter;
+                    const newDiceObject = event.eachDice.slice();
+                    if(newDiceObject[index] < event.numberOfSides){
+                        newDiceObject[index] = newDiceObject[index] + 1;
+                    }
+                    else{
+                        newDiceObject[index] = 1;
+                    }
+                    return { eachDice: newDiceObject };
+                });
+            };
+
+            diceRoll(){
+                    this.setState({eachDice: this.state.eachDice.map(() => Math.ceil(Math.random() * this.state.numberOfSides))})
+            }
+
+           
+      
+        render()
+        {
+
+ 
+          return(
+            <div id="outermostDiv">
+                <div id="headings">
+                    <h1><strong>Assignment #3 React Basics</strong></h1>
+                    <h2><strong>Dice Roll</strong></h2>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                    <div id="contentDisplay">
+                        <label onClick={this.increaseNumberofDice.bind(this)}>number of dice : {this.state.numberOfDice}</label>
+                        <br/>
+                        <br/>
+                        <button onClick={this.diceReset.bind(this)}>Reset</button>
+                        <br/>
+                        <br/>
+                        <label>number of sides : {this.state.numberOfSides}</label>
+                        <br/>
+                        <br/>
+                        <button onClick={this.decreaseNumberofSides.bind(this)}>DOWN</button>
+                        <button onClick={this.increaseNumberofSides.bind(this)}>UP</button>    
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div id="DiceDisplay">
+                        {this.state.eachDice.map((diceNumber, counter) => (
+                            <div key={counter}>
+                                <Dice number={diceNumber} clickEvent={() => this.changedDiceNumber.bind(counter)} changedDiceNumber={this.changedDiceNumber}/>
+                            </div>
+                        ))}
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div id="rollButton">
+                        <button onClick={this.diceRoll.bind(this)}>ROLL</button>                        
+                    </div>
+            </div>
+            
+          )
+        }
+    }
+
+    
+     
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<DiceApp initialCounterProp={6} initialNumberOfSides={1}/>);
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this page for starting a new React project with JSX:
+      https://react.dev/learn/start-a-new-react-project
+
+      Read this page for adding React with JSX to an existing project:
+      https://react.dev/learn/add-react-to-an-existing-project
+    -->
+  </body>
+</html>
